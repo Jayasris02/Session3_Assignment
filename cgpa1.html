@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Institute CGPA Calculator</title>
+</head>
+<body>
+    <h2>CGPA Calculator</h2>
+
+    <form id="cgpaForm">
+        <div>
+            <label for="credits1">Credits for Course 1:</label>
+            <input type="number" id="credits1" name="credits1" min="1" required>
+            <label for="grade1">Grade for Course 1:</label>
+            <input type="text" id="grade1" name="grade1" required>
+        </div>
+        <div>
+            <label for="credits2">Credits for Course 2:</label>
+            <input type="number" id="credits2" name="credits2" min="1" required>
+            <label for="grade2">Grade for Course 2:</label>
+            <input type="text" id="grade2" name="grade2" required>
+        </div>
+        <!-- Add more course inputs as needed -->
+
+        <button type="button" onclick="calculateCGPA()">Calculate CGPA</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateCGPA() {
+            const credits1 = parseFloat(document.getElementById('credits1').value);
+            const grade1 = document.getElementById('grade1').value.toUpperCase();
+            const credits2 = parseFloat(document.getElementById('credits2').value);
+            const grade2 = document.getElementById('grade2').value.toUpperCase();
+            // Add more variables for additional courses if needed
+
+            const grades = {
+                'A+': 10,
+                'A': 9,
+                'B+': 8,
+                'B': 7,
+                'C': 6,
+                'P': 5, // Assuming 'P' stands for Pass, adjust as per your institute's grading scale
+                'F': 0
+            };
+
+            const gradeValue1 = grades[grade1] || 0;
+            const gradeValue2 = grades[grade2] || 0;
+            // Calculate GPA for each course
+            const gpa1 = (gradeValue1 * credits1) / credits1;
+            const gpa2 = (gradeValue2 * credits2) / credits2;
+            // Calculate CGPA
+            const totalCredits = credits1 + credits2;
+            const totalGP = gpa1 + gpa2;
+            const cgpa = totalGP / totalCredits;
+
+            document.getElementById('result').textContent = `Your CGPA is: ${cgpa.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

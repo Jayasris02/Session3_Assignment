@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .input-group {
+            margin: 20px;
+        }
+        .input-group input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .input-group button {
+            background-color: #04AA6D;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <div class="input-group">
+        <input type="number" id="guess-input" placeholder="Enter your guess" required>
+        <button onclick="checkGuess()" color="green">Guess</button>
+    </div>
+    <p id="message"></p>
+
+    <script src="cgpa.js">
+        const targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = document.getElementById('guess-input').value;
+            const message = document.getElementById('message');
+            attempts++;
+
+            if (!userGuess) {
+                message.innerText = 'Please enter a number!';
+                return;
+            }
+
+            if (userGuess < targetNumber) {
+                message.innerText = `Your guess is too low. Try again! Attempts: ${attempts}`;
+            } else if (userGuess > targetNumber) {
+                message.innerText = `Your guess is too high. Try again! Attempts: ${attempts}`;
+            } else {
+                message.innerText = `Congratulations! You guessed the correct number ${targetNumber} in ${attempts} attempts.`;
+            }
+        }
+    </script>
+</body>
+</html>
